@@ -1,13 +1,26 @@
-%h1 Surfspots controller, new action
+%h2 New surf spot
 
-%p 
-  Edit this file in 
-  %tt app/views/surfspots/new.html.erb
+#map1.jmap
 
-= error_messages_for :surfspot
+.column.position-info
+  %h3 Spot info
+  .position-value
+  .address-value
 
-= form_for(@surfspot, :action => url(:surfspots) ) do
-  %p
-    = submit "Create"
+.column.create-form
+  = error_messages_for :surfspot
 
-= link_to 'Back', url(:surfspots)
+  = form_for(@surfspot, :action => url(:surfspots) ) do
+    %fieldset
+      %ul
+        %li= text_field :name, :label => 'Name'
+        %li= text_field :longitude, :label => 'Longitude'
+        %li= text_field :latitude, :label => 'Latitude'
+        %li= text_field :town, :label => 'Town'
+        %li= text_field :region, :label => 'Region'
+        %li= text_field :postcode, :label => 'Postcode'
+        %li= text_field :state, :label => 'State'
+        %li= text_area :description, :label => 'Description'
+        %li= submit "Create"
+
+  = link_to 'Back', url(:surfspots)

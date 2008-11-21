@@ -6,3 +6,5 @@ body {text-align:center;background-color:#fff}
     .header {padding-top:1.5em}
     
     #map1 {width:100%;height:450px}
+    
+    .position-info, .create-form {width:450px}
