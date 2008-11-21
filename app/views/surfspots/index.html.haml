@@ -1,0 +1,16 @@
+%h1
+  Surfspots controller, index action
+%p
+  Edit this file in
+  %tt
+    app/views/surfspots/index.html.erb
+%table
+  %tr
+  - for surfspot in @surfspots
+    %tr
+      %td
+        = link_to 'Show', url(:surfspot, surfspot)
+      %td
+        = link_to 'Edit', url(:edit_surfspot,  surfspot)
+
+= link_to 'New', url(:new_surfspot)

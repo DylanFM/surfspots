@@ -1,0 +1,13 @@
+%h1 Surfspots controller, new action
+
+%p 
+  Edit this file in 
+  %tt app/views/surfspots/new.html.erb
+
+= error_messages_for :surfspot
+
+= form_for(@surfspot, :action => url(:surfspots) ) do
+  %p
+    = submit "Create"
+
+= link_to 'Back', url(:surfspots)
