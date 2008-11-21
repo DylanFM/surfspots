@@ -20,7 +20,7 @@
         %li= text_field :region, :label => 'Region'
         %li= text_field :postcode, :label => 'Postcode'
         %li= text_field :state, :label => 'State'
-        %li= text_area :description, :label => 'Description'
+        %li= text_area :description, :label => 'Description', :rows => 12, :cols => 32
         %li= submit "Create"
 
   = link_to 'Back', url(:surfspots)
