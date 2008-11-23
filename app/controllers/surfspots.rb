@@ -24,6 +24,12 @@ class Surfspots < Application
     raise NotFound unless @surfspot
     display @surfspot
   end
+  
+  def delete(id)
+    @surfspot = Surfspot.get(id)
+    raise NotFound unless @surfspot
+    display @surfspot
+  end
 
   def create(surfspot)
     @surfspot = Surfspot.new(surfspot)

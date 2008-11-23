@@ -1,9 +1,14 @@
-%h1
-  Surfspots controller, show action
-%p
-  Edit this file in
-  %tt
-    app/views/surfspots/show.html.erb
+%h2= @surfspot.name
+.adr
+  .geo
+    %span.latitude= @surfspot.latitude
+    %span.longitude= @surfspot.longitude
+  %span.locality= @surfspot.town
+  %br/
+  %span.subregion= "#{@surfspot.region}, "
+  %span.region= @surfspot.state
+  %span.postal-code= @surfspot.postcode
+%p= @surfspot.description
 
 = link_to 'Edit',  url(:edit_surfspot,  @surfspot)
 |

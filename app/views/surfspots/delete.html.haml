@@ -1,0 +1,4 @@
+%h2 Delete surf spot
+%p= "Confirm the deletion of the surf spot <em>#{@surfspot.name}</em> below."
+= delete_button(resource(@surfspot), "Delete")
+= link_to 'Cancel', resource(@surfspot)

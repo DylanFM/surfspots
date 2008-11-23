@@ -1,14 +1,19 @@
-%h1
-  Surfspots controller, edit action
-%p
-  Edit this file in
-  %tt
-    app/views/surfspots/edit.html.erb
+%h2= "Edit #{@surfspot.name}"
+
 = error_messages_for :surfspot
 
 = form_for(@surfspot, :action => url(:surfspot, @surfspot)) do
-  %p
-    = submit "Update"
+  %fieldset
+    %ul
+      %li= text_field :name, :label => 'Name'
+      %li= text_field :longitude, :label => 'Longitude'
+      %li= text_field :latitude, :label => 'Latitude'
+      %li= text_field :town, :label => 'Town'
+      %li= text_field :region, :label => 'Region'
+      %li= text_field :postcode, :label => 'Postcode'
+      %li= text_field :state, :label => 'State'
+      %li= text_area :description, :label => 'Description', :rows => 12, :cols => 32
+      %li= submit "Save"
 
 = link_to 'Show', url(:surfspot, @surfspot)
 |
