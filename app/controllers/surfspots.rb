@@ -1,5 +1,5 @@
 class Surfspots < Application
-  # provides :xml, :yaml, :js
+  provides :json
 
   def index
     @surfspots = Surfspot.all :order => [:name.asc]
