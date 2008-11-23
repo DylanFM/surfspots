@@ -2,7 +2,7 @@ class Surfspots < Application
   # provides :xml, :yaml, :js
 
   def index
-    @surfspots = Surfspot.all
+    @surfspots = Surfspot.all :order => [:name.asc]
     display @surfspots
   end
 
