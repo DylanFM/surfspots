@@ -10,7 +10,7 @@
 .column.create-form
   = error_messages_for :surfspot
 
-  = form_for(@surfspot, :action => url(:surfspots) ) do
+  = form_for(@surfspot, :action => url(:surfspots)) do
     %fieldset
       %ul
         %li= text_field :name, :label => 'Name'
