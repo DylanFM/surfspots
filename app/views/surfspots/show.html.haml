@@ -8,7 +8,7 @@
   %span.subregion= "#{@surfspot.region}, "
   %span.region= @surfspot.state
   %span.postal-code= @surfspot.postcode
-%p= @surfspot.description
+%p.description= @surfspot.description
 
 = link_to 'Edit',  url(:edit_surfspot,  @surfspot)
 |
