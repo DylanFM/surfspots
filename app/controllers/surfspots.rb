@@ -33,11 +33,22 @@ class Surfspots < Application
 
   def create(surfspot)
     @surfspot = Surfspot.new(surfspot)
+    msg = {}
     if @surfspot.save
-      redirect resource(@surfspot), :message => {:notice => "The spot #{@surfspot.name} was created"}
+      msg[:notice] = "The spot #{@surfspot.name} was created"
+      if request.xhr?
+        msg.to_json
+      else  
+        redirect resource(@surfspot), :message => msg
+      end
     else
       message[:error] = "Surfspot failed to be created"
-      render :new
+      msg[:error] = [message[:error]] << @surfspot.errors.to_a
+      if request.xhr?
+        msg.to_json
+      else
+        render :new
+      end
     end
   end
 
