@@ -34,7 +34,7 @@ class Surfspots < Application
   def create(surfspot)
     @surfspot = Surfspot.new(surfspot)
     if @surfspot.save
-      redirect resource(@surfspot), :message => {:notice => "Surfspot was successfully created"}
+      redirect resource(@surfspot), :message => {:notice => "The spot #{@surfspot.name} was created"}
     else
       message[:error] = "Surfspot failed to be created"
       render :new
