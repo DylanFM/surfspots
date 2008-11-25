@@ -1,5 +1,15 @@
 jQuery(document).ready(function()
 {
+  // Setup copy links
+  $('a#copy-all-pos-info').click(cpAll);
+  $('#pos_coords').click(cpCoords);
+  $('#pos_name').click(cpName);
+  $('#pos_town').click(cpTown);
+  $('#pos_region').click(cpRegion);
+  $('#pos_postcode').click(cpPostcode);
+  $('#pos_state').click(cpState);
+  
+  // Mappy stuff
 	jQuery('#map1').jmap('init',{
 		'mapType':'hybrid',
 		'mapCenter':[-28.459033019728043,136.23046875],
@@ -49,3 +59,39 @@ function displayThereInfo (result, options)
 	}
 }
 
+// Functions for copying
+function cpAll ()
+{
+  cpCoords();
+  cpName();
+  cpTown();
+  cpRegion();
+  cpPostcode();
+  cpState();
+  return false;
+}
+function cpCoords ()
+{
+  $('#surfspot_longitude').attr('value',$('#pos_longitude').text());
+  $('#surfspot_latitude').attr('value',$('#pos_latitude').text());
+}
+function cpName ()
+{
+  $('#surfspot_name').attr('value',$('#pos_name').text());
+}
+function cpTown ()
+{
+  $('#surfspot_town').attr('value',$('#pos_town').text());
+}
+function cpRegion ()
+{
+  $('#surfspot_region').attr('value',$('#pos_region').text());
+}
+function cpPostcode ()
+{
+  $('#surfspot_postcode').attr('value',$('#pos_postcode').text());
+}
+function cpState ()
+{
+  $('#surfspot_state').attr('value',$('#pos_state').text());
+}
