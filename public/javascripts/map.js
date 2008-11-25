@@ -63,17 +63,19 @@ function displayThereInfo (result, options)
 function cpAll ()
 {
   cpCoords();
-  cpName();
+  // cpName();
   cpTown();
-  cpRegion();
+  // cpRegion();
   cpPostcode();
   cpState();
   return false;
 }
 function cpCoords ()
 {
-  $('#surfspot_longitude').attr('value',$('#pos_longitude').text());
-  $('#surfspot_latitude').attr('value',$('#pos_latitude').text());
+  var lat = $('#pos_longitude').text().slice(0,10);
+  var lng = $('#pos_latitude').text().slice(0,10);
+  $('#surfspot_longitude').attr('value',lat);
+  $('#surfspot_latitude').attr('value',lng);
 }
 function cpName ()
 {
