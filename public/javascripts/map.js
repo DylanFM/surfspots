@@ -13,9 +13,10 @@ jQuery(document).ready(function()
 	{
 	  GEvent.addListener(map, 'dblclick', function(overlay, latlng)
 		{
-      // Display coords
-			jQuery('.position-value').text(latlng.lat() + ',' + latlng.lng());
-			
+      // Print coords
+      $('#pos_latitude').text(latlng.lat());
+  	  $('#pos_longitude').text(latlng.lng());
+		  
       // Place a marker
       // jQuery('#map1').jmap('AddMarker', {
       //        'pointLatLng': [latlng.lat(), latlng.lng()],
@@ -28,7 +29,7 @@ jQuery(document).ready(function()
 				'returnType':'getLocations'
 			}, function(result, options)
 			{
-        // Display coords info
+        // Display coord's info
 				displayThereInfo(result, options);
 			});
 		});
@@ -39,11 +40,12 @@ function displayThereInfo (result, options)
 {
 	var valid = Mapifies.SearchCode(result.Status.code);
 	if (valid.success) {
-		var output = ['<ul>'];
-		jQuery.each(result.Placemark, function(i, point){
-			output.push('<li>' + point.address + '</li>');
-		});
-		output.push('</ul>');
-		jQuery('.address-value').html(output.join(''));
+	  var info = result.Placemark[0].AddressDetails.Country;
+    // console.log(info);
+	  $('#pos_state').text(info.AdministrativeArea.AdministrativeAreaName);
+	  $('#pos_town').text(info.AdministrativeArea.Locality.LocalityName);
+	  $('#pos_postcode').text(info.AdministrativeArea.Locality.PostalCode.PostalCodeNumber);
+	  $('#pos_name').text(info.AdministrativeArea.AddressLine);
 	}
 }
+

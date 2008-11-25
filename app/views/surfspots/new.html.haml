@@ -4,8 +4,24 @@
 
 .column.position-info
   %h3 Spot info
-  .position-value
-  .address-value
+  %a{ :href => '#', :id => 'copy-all-pos-info', :title => 'Copy all info to form' }
+    Copy all to form
+  %dl
+    %dt Coordinates
+    %dd
+      %span#pos_latitude ?
+      , 
+      %span#pos_longitude ?
+    %dt Name
+    %dd#pos_name &nbsp;
+    %dt Town
+    %dd#pos_town &nbsp;
+    %dt Region
+    %dd#pos_region &nbsp;
+    %dt Postcode
+    %dd#pos_postcode &nbsp;
+    %dt State
+    %dd#pos_state &nbsp;
 
 .column.create-form
   = error_messages_for :surfspot
