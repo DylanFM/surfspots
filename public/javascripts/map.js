@@ -26,12 +26,6 @@ jQuery(document).ready(function()
       // Print coords
       $('#pos_latitude').text(latlng.lat());
   	  $('#pos_longitude').text(latlng.lng());
-		  
-      // Place a marker
-      // jQuery('#map1').jmap('AddMarker', {
-      //        'pointLatLng': [latlng.lat(), latlng.lng()],
-      //        'pointIsRemovable':true
-      //      });
 			
       // Search for info on coords
 			jQuery('#map1').jmap('SearchAddress', {

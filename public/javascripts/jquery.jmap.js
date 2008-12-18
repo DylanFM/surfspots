@@ -83,8 +83,7 @@ Mapifies.Initialise = function ( element, options, callback ) {
 	 * @param {Boolean} mapEnableOverview Defines if the map overview is shown.  Default false.
 	 * @param {Boolean} mapEnableDragging Defines if the map is draggable or not.  Default true.
 	 * @param {Boolean} mapEnableInfoWindows Defines if info windows are shown on the map or not.  Default true.
- 	 * @param {Boolean} mapEnableDoubleClickZoom Defines if double clicking zooms the map.  Default false.
- 	 * @param {Boolean} mapDisableDoubleClickZoom Defines if double clicking zooms the map.  Default false.
+	 * @param {Boolean} mapEnableDoubleClickZoom Defines if double clicking zooms the map.  Default false.
 	 * @param {Boolean} mapEnableSmoothZoom Defines if smooth scrolling is enabled.  Default false.
 	 * @param {Boolean} mapEnableGoogleBar Defines if the google map search tool is enabled.  Default false.
 	 * @param {Boolean} mapEnableScaleControl Defines if the scale bar is shown.  Default false.
@@ -115,8 +114,6 @@ Mapifies.Initialise = function ( element, options, callback ) {
 			'mapEnableInfoWindows': true,
 			// Enable double click zooming
 			'mapEnableDoubleClickZoom': false,
-			// Disable double click zooming
-			'mapDisableDoubleClickZoom': false,
 			// Enable zooming with scroll wheel
 			'mapEnableScrollZoom': false,
 			// Enable smooth zoom
@@ -176,9 +173,6 @@ Mapifies.Initialise = function ( element, options, callback ) {
 		// Enable double click zoom on the map
 		if (options.mapEnableDoubleClickZoom) 
 			thisMap.enableDoubleClickZoom(); // On by default
-		// Enable double click zoom on the map
-		if (options.mapDisableDoubleClickZoom) 
-			thisMap.disableDoubleClickZoom(); // On by default
 		// Enable scrollwheel on the map
 		if (options.mapEnableScrollZoom) 
 			thisMap.enableScrollWheelZoom(); //Off by default
@@ -301,6 +295,23 @@ Mapifies.CreateKeyboardHandler = function( element, options, callback ) {
 	var thisMap = Mapifies.MapObjects.Get(element);
 	var keyboardHandler = new GKeyboardHandler(thisMap);
 	if (typeof callback == 'function') return callback(keyboardHandler);
+};
+
+/**
+ * Check if a map container element has been resized or toggled from show/hide (Added r68)
+ * @method
+ * @namespace Mapifies
+ * @id Mapifies.CheckResize
+ * @alias Mapifies.CheckResize
+ * @param {jQuery} element The element to initialise the map on.
+ * @param {Object} options The object that contains the options.
+ * @param {Object} callback The callback function to pass out after initialising the map.
+ * @return {Function} callback The callback option with the map object handler.
+ */
+Mapifies.CheckResize = function( element, options, callback ) {
+	var thisMap = Mapifies.MapObjects.Get(element);
+	thisMap.checkResize();
+	if (typeof callback == 'function') return callback(element);
 };
 
 /**
@@ -651,7 +662,7 @@ Mapifies.AddMarker = function ( element, options, callback ) {
 	 * @param {Number} pointMaxZoom The maximum zoom level to display the marker if using a marker manager.
 	 * @param {GIcon} pointIcon A GIcon to display instead of the standard marker graphic.
 	 * @param {Boolean} centerMap Automatically center the map on the new marker.  Default false.
-	 * @param {String} centerMoveMethod The method in which to move to the marker.  Options are 'normal' (default) and 'pan'
+	 * @param {String} centerMoveMethod The method in which to move to the marker.  Options are 'normal' (default) and 'pan'.  Added r64
 	 * @return {Object} The options for AddGroundOverlay
 	 */
 	function defaults() {
@@ -757,6 +768,7 @@ Mapifies.CreateMarkerManager = function(element, options, callback) {
 	 * @namespace Mapifies.CreateMarkerManager
 	 * @id Mapifies.CreateMarkerManager.defaults
 	 * @alias Mapifies.CreateMarkerManager.defaults
+	 * @param {String} markerManager The type of marker manager to use.  Options are 'GMarkerManager' (default) and 'MarkerManager'.  (Added r72)
 	 * @param {Number} borderPadding Specifies, in pixels, the extra padding outside the map's current viewport monitored by a manager. Markers that fall within this padding are added to the map, even if they are not fully visible.
 	 * @param {Number} maxZoom The maximum zoom level to show markers at
 	 * @param {Boolean} trackMarkers Indicates whether or not a marker manager should track markers' movements.
@@ -764,6 +776,7 @@ Mapifies.CreateMarkerManager = function(element, options, callback) {
 	 */
 	function defaults() {
 		return {
+			'markerManager': 'GMarkerManager',
 			// Border Padding in pixels
 			'borderPadding': 100,
 			// Max zoom level 
@@ -774,7 +787,14 @@ Mapifies.CreateMarkerManager = function(element, options, callback) {
 	}
 	var thisMap = Mapifies.MapObjects.Get(element);
 	options = jQuery.extend(defaults(), options);
-	var markerManager = new GMarkerManager(thisMap, options);
+	
+	var markerManagerOptions = {
+		'borderPadding': options.borderPadding,
+		'maxZoom': options.maxZoom,
+		'trackMarkers': options.trackMarkers
+	}
+	
+	var markerManager = new window[options.markerManager](thisMap, options);
 	Mapifies.MapObjects.Append(element, 'MarkerManager',markerManager);
 
 	// Return the callback
