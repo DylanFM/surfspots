@@ -43,10 +43,17 @@ jQuery(document).ready(function()
     $.getJSON('/surfspots.json', function(data) 
     {
       jQuery('#map1').jmap('CreateMarkerManager', {'markerManager':'MarkerManager'});
+      // Loop through spots
       for (var i=0; i < data.length; i++) 
       {
+        // Sort out data for spot
         var spot = data[i];
-        jQuery('#map1').jmap('AddMarker', {'pointLatLng': [spot.latitude,spot.longitude]});
+        var spotMarkup = '<h4>'+spot.name+'</h4><a href="/surfspots/'+spot.id+'/edit" title="Edit '+spot.name+'">[<em>Edit</em>]</a> <a href="/surfspots/'+spot.id+'/delete" title="Delete '+spot.name+'">[<em>Delete</em>]</a><br />'+spot.latitude+', '+spot.longitude+'<br />'+spot.town+', '+spot.region+'<br />'+spot.state+' '+spot.postcode;
+        // Add the marker
+        jQuery('#map1').jmap('AddMarker', {
+          'pointLatLng': [spot.latitude,spot.longitude],
+          'pointHTML': spotMarkup
+          });
       }
     });
 	});
