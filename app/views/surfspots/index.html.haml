@@ -1,13 +1,16 @@
-%h2 Surf spots
-%p
-  Listing all the surf spots. 
-  = link_to 'Add a spot', resource(:surfspots, :new)
-%ul.surfspot-list
-  - if @surfspots.empty?
-    %li There are no surf spots
-  - else
-    - for surfspot in @surfspots
-      %li
-        = link_to surfspot.name, url(:surfspot, surfspot)
-        %em= link_to '[edit]', resource(surfspot, :edit)
-        %em= link_to '[destroy]', resource(surfspot, :delete)
+%h2 View all
+.column.listing
+  %p
+    Listing all the surf spots. 
+    = link_to 'Add a spot', resource(:surfspots, :new)
+  %ul.surfspot-list
+    - if @surfspots.empty?
+      %li There are no surf spots
+    - else
+      - for surfspot in @surfspots
+        %li
+          = link_to surfspot.name, url(:surfspot, surfspot)
+          %em= link_to '[edit]', resource(surfspot, :edit)
+          %em= link_to '[destroy]', resource(surfspot, :delete)
+.column.map
+  #map1.jmap

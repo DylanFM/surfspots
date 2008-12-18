@@ -8,3 +8,6 @@ body {text-align:center;background-color:#fff}
     #map1 {width:100%;height:450px}
     
     .position-info, .create-form {width:450px}
+    div.listing {width:250px}
+    div.map {width:650px}
+      div.map #map1 {height:550px}
