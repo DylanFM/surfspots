@@ -21,6 +21,7 @@ jQuery(document).ready(function()
 	},
 	function (map, element, options)
 	{
+    // Search on double-click
 	  GEvent.addListener(map, 'dblclick', function(overlay, latlng)
 		{
       // Print coords
@@ -37,6 +38,17 @@ jQuery(document).ready(function()
 				displayThereInfo(result, options);
 			});
 		});
+		
+    // Add markers of existing surf spots
+    $.getJSON('/surfspots.json', function(data) 
+    {
+      jQuery('#map1').jmap('CreateMarkerManager', {'markerManager':'MarkerManager'});
+      for (var i=0; i < data.length; i++) 
+      {
+        var spot = data[i];
+        jQuery('#map1').jmap('AddMarker', {'pointLatLng': [spot.latitude,spot.longitude]});
+      }
+    });
 	});
 });
 
